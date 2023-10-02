@@ -25,14 +25,21 @@ async function setWater(img) {
       opacityDest: 1,
     });
 
-    // 保存带水印的图片
-    const outputImagePath = `watermarked_${new Date().getTime()}.jpg`;
-    const outputPath = join(process.cwd(), 'public', 'images', outputImagePath);
 
-    await image.writeAsync(outputPath);
-    console.log('__________outputImagePath_________',outputPath)
-    // 返回带水印的图片路径或其他响应给客户端
-    return '/images/'+outputImagePath;
+    return image;
+
+    // 保存带水印的图片
+//    const outputImagePath = `watermarked_${new Date().getTime()}.jpg`;
+//    const outputPath = join(process.cwd(), 'public', 'images', outputImagePath);
+//
+//
+//    await image.writeAsync(outputPath);
+//
+//
+//
+//    console.log('__________outputImagePath_________',outputPath)
+//    // 返回带水印的图片路径或其他响应给客户端
+//    return '/images/'+outputImagePath;
   } catch (error) {
     // 处理异常情况
     console.error(error);
@@ -42,6 +49,7 @@ async function setWater(img) {
 
 export default async function handler(req, res) {
   try {
+
     console.log("req.body", req.body);
     // 调用接口A并增加header参数abc
     const url =
@@ -56,11 +64,18 @@ export default async function handler(req, res) {
     const response = await axios.get(url, { headers });
     console.log("response", response.data);
     const handleImgWater=await setWater(response.data.profile_image_url_https)
-    console.log('handleImgWater',handleImgWater)
-    // 获取接口A的返回值，并返回给客户端
-    res.status(200).send({
-        img:handleImgWater
-    });
+
+    // 设置响应头，指定返回的内容类型为 image/png
+    res.setHeader('Content-Type', 'image/png');
+
+    // 将图像数据作为响应主体返回给客户端
+    res.send(handleImgWater);
+
+//    console.log('handleImgWater',handleImgWater)
+//    // 获取接口A的返回值，并返回给客户端
+//    res.status(200).send({
+//        img:handleImgWater
+//    });
     // res.status(200).send({
     //     img:'https://imgcps.jd.com/img-cubic/creative_server_cia_jdcloud/v2/2000366/100049058416/FocusFullshop/CkNqZnMvdDEvMTI5MTg4LzkvMzc4NjQvNzA5NDU5LzY1MGNhMTJlRmUxMjAwMDMyL2Q4NWZiODgyZjA0Y2YwOWQucG5nEgkzLXR5XzBfNTQwAjjui3pCFgoS57Si5bC85bmz5p2_55S16KeGEAFCEwoP5a6e5oOg5LmQ5LiN5YGcEAJCEAoM56uL5Y2z5oqi6LStEAZCCgoG5Yqb6I2QEAdY8PSN2_QC/cr/s/q.jpg'
     // });
