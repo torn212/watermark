@@ -22,7 +22,7 @@ async function setWater(img) {
     // 添加水印到原始图片
     image.composite(watermark, x, y, {
       mode: Jimp.BLEND_SCREEN,
-      opacitySource: 0.2,
+      opacitySource: 1,
       opacityDest: 1,
     });
 
