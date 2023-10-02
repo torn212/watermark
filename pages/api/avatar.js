@@ -74,7 +74,7 @@ export default async function handler(req, res) {
 //    console.log('handleImgWater',handleImgWater)
 //    // 获取接口A的返回值，并返回给客户端
     res.status(200).send({
-        img:handleImgWater
+        img:"data:image/jpg;base64,"+Buffer.from(handleImgWater).toString('base64')
     });
     // res.status(200).send({
     //     img:'https://imgcps.jd.com/img-cubic/creative_server_cia_jdcloud/v2/2000366/100049058416/FocusFullshop/CkNqZnMvdDEvMTI5MTg4LzkvMzc4NjQvNzA5NDU5LzY1MGNhMTJlRmUxMjAwMDMyL2Q4NWZiODgyZjA0Y2YwOWQucG5nEgkzLXR5XzBfNTQwAjjui3pCFgoS57Si5bC85bmz5p2_55S16KeGEAFCEwoP5a6e5oOg5LmQ5LiN5YGcEAJCEAoM56uL5Y2z5oqi6LStEAZCCgoG5Yqb6I2QEAdY8PSN2_QC/cr/s/q.jpg'
