@@ -1,6 +1,7 @@
 const axios = require("axios");
 const Jimp = require("jimp");
 import { join } from 'path';
+import fs from 'fs';
 
 async function setWater(img) {
   try {
@@ -64,21 +65,14 @@ export default async function handler(req, res) {
     const response = await axios.get(url, { headers });
     console.log("response", response.data);
     const handleImgWater=await setWater(response.data.profile_image_url_https)
+    console.log('handleImgWater',handleImgWater)
 
-    // 设置响应头，指定返回的内容类型为 image/png
-//    res.setHeader('Content-Type', 'image/png');
+    const imageBinary = await handleImgWater.getBufferAsync(Jimp.MIME_PNG);
+    // 设置响应头，指定内容类型为 image/png
+    res.setHeader('Content-Type', 'image/png');
 
-    // 将图像数据作为响应主体返回给客户端
-//    res.send(handleImgWater);
-
-//    console.log('handleImgWater',handleImgWater)
-//    // 获取接口A的返回值，并返回给客户端
-    res.status(200).send({
-        img:handleImgWater
-    });
-    // res.status(200).send({
-    //     img:'https://imgcps.jd.com/img-cubic/creative_server_cia_jdcloud/v2/2000366/100049058416/FocusFullshop/CkNqZnMvdDEvMTI5MTg4LzkvMzc4NjQvNzA5NDU5LzY1MGNhMTJlRmUxMjAwMDMyL2Q4NWZiODgyZjA0Y2YwOWQucG5nEgkzLXR5XzBfNTQwAjjui3pCFgoS57Si5bC85bmz5p2_55S16KeGEAFCEwoP5a6e5oOg5LmQ5LiN5YGcEAJCEAoM56uL5Y2z5oqi6LStEAZCCgoG5Yqb6I2QEAdY8PSN2_QC/cr/s/q.jpg'
-    // });
+    // 发送水印图片的二进制数据给客户端
+    res.send(imageBinary);
   } catch (error) {
     // 处理异常情况
     console.error(error);

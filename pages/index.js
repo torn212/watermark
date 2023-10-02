@@ -23,11 +23,23 @@ export default function HomePage() {
       if (!response.ok) {
         throw new Error("接口请求失败");
       }
+      console.log("response", response.body);
+      const streamResponse = new Response(response.body);
 
-      const data = await response.json();
-      console.log("data", data);
+      // 创建一个 Image 元素
+      const image = new Image();
+      // 将 ReadableStream 转换为 Blob 对象
+      const blob = await streamResponse.blob();
+      // 创建一个 URL 对象
+      const imageURL = URL.createObjectURL(blob);
+      // 设置 Image 元素的 src 属性为 URL 对象
+      image.src = imageURL;
+      // 添加 Image 元素到 HTML 页面中的某个容器中
+      document.body.appendChild(image);
+      console.log('imageURL',imageURL)
+
       setEmpty(false);
-      setImageSrc(data.img.bitmap.data.data);
+      setImageSrc(imageURL);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -42,7 +54,7 @@ export default function HomePage() {
     downloadLink.href = imageSrc;
     downloadLink.target = "_blank";
     // 设置下载的文件名
-    downloadLink.download = "image.jpg";
+    downloadLink.download = "water_mark.jpg";
     // 模拟点击下载链接
     downloadLink.click();
   };
