@@ -36,7 +36,7 @@ export default function HomePage() {
       image.src = imageURL;
       // 添加 Image 元素到 HTML 页面中的某个容器中
       document.body.appendChild(image);
-      console.log('imageURL',imageURL)
+      console.log("imageURL", imageURL);
 
       setEmpty(false);
       setImageSrc(imageURL);
@@ -62,20 +62,30 @@ export default function HomePage() {
   return (
     <div className="watermark-box">
       <div className="watermark-content">
-        <div className="top-info">
-          Enter Twitter nicknames to generate watermarked avatars and support
-          downloading.
+        <div className="title">FTool – watermark tool</div>
+        <div className="des mt20">
+          Add friend.tech watermark to your X (formerly Twitter) avatar
         </div>
+        <div className="des">给你的推特头像加FT水印</div>
         <div className="input-info">
+          <div className="input-info-label">Twitter handle</div>
           <input
             type="text"
             value={inputValue}
             placeholder="Please enter a Twitter nickname."
             onChange={(e) => setInputValue(e.target.value)}
           />
-          {inputValue && (
-            <button onClick={handleConfirm}>Generate watermark</button>
-          )}
+          {inputValue && <button onClick={handleConfirm}>Get avatar </button>}
+        </div>
+        <div className="border-box">
+          <p>by @yequ_eth 夜曲 </p>
+          <p>
+            FT{" "}
+            <a href="https://friend.tech/yequ_eth" target="_blank">
+              https://friend.tech/yequ_eth
+            </a>
+          </p>
+          <p>Adding me to your FT Watchlist is very helpful</p>
         </div>
         {loading && (
           <svg
@@ -104,7 +114,11 @@ export default function HomePage() {
         {imageSrc && (
           <div className="img-info">
             <img src={imageSrc} alt="图片" />
-            <button onClick={handleDownload}>Download watermark</button>
+            <button onClick={handleDownload}>Save</button>
+            <p className="img-info-tips">
+              Press to enlarge, save, upload to Twitter, and Sync Profile in FT <br/>
+              点击放大，保存，上传至推特，并在FT中同步推特资料
+            </p>
           </div>
         )}
       </div>
