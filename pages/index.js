@@ -27,7 +27,7 @@ export default function HomePage() {
       const data = await response.json();
       console.log("data", data);
       setEmpty(false);
-      setImageSrc(data.img);
+      setImageSrc(data.img.bitmap.data.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
