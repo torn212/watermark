@@ -16,12 +16,12 @@ async function setWater(img) {
     watermark.scaleToFit(image.getWidth() / 2, image.getHeight() / 2);
 
     // 设置水印位置
-    const x = (image.getWidth() - watermark.getWidth()) / 2;
-    const y = (image.getHeight() - watermark.getHeight());
+    const x = image.getWidth()/ 4;
+    const y = image.getHeight()/2;
 
     // 添加水印到原始图片
     image.composite(watermark, x, y, {
-      mode: Jimp.BLEND_SCREEN,
+      mode: Jimp.BLEND_SOURCE_OVER,
       opacitySource: 1,
       opacityDest: 1,
     });
