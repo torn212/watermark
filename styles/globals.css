@@ -1,0 +1,141 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+.watermark-box{
+  width: 100%;
+  
+}
+.watermark-content{
+ width: 800px;
+ height: 96vh;
+ margin: 2vh auto;
+ /* border: 1px solid #9d9999; */
+ box-shadow: 0 0 10px #ccc;
+ padding: 60px;
+ position: relative;
+ border-radius: 10px;
+}
+.watermark-content .top-info{
+  color: #666;
+  font-size: 16px;
+}
+.watermark-content .input-info{
+ width: 100%;
+ display: flex;
+ flex-direction: row;
+ margin-top: 40px;
+
+}
+.input-info input{
+  width: 300px;
+  height: 34px;
+  border: 1px solid #eee;
+  border-radius: 6px;;
+  padding: 0 20px;
+}
+.input-info button{
+  font-size: 14px;;
+  margin-left: 30px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.input-info button:hover{
+ color: rgb(6, 54, 78);
+}
+.img-info{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.img-info img{
+  width: 100px;
+  margin: 10px auto;
+}
+.img-info button{
+  width: 200px;
+  line-height: 34px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #009797;
+  color: #ffffff;
+
+
+}
+.img-info button:hover{
+  background: #016565;
+}
+.empty-info{
+  width: 100%;
+  padding-top: 100px;
+  text-align: center;
+}
+
+.circular-box {
+  animation: loading-rotate 2s linear infinite;
+  position: absolute;
+  left: 48%;
+  top: 200px;;
+}
+.circle {
+  stroke-dasharray: 900;
+  stroke-dashoffset: -3;
+  animation: loading-dash 1.5s ease-in-out infinite;
+}
+@keyframes loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120;
+  }
+}
+@keyframes loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
