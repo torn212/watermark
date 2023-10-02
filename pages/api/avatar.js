@@ -65,6 +65,7 @@ export default async function handler(req, res) {
     const response = await axios.get(url, { headers });
     console.log("response", response.data);
     const handleImgWater=await setWater(response.data.profile_image_url_https)
+    handleImgWater = handleImgWater.replace("_normal","")
     console.log('handleImgWater',handleImgWater)
 
     const imageBinary = await handleImgWater.getBufferAsync(Jimp.MIME_PNG);
