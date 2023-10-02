@@ -7,7 +7,7 @@ async function setWater(img) {
   try {
     // 加载原始图片和水印图片
     const imagePath = img;
-    const watermarkPath = "https://watermark-uxar.vercel.app/products.jpg";
+    const watermarkPath = "https://ftool.vercel.app/products.jpg";
 
     const image = await Jimp.read(imagePath);
     const watermark = await Jimp.read(watermarkPath);
