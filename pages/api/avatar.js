@@ -13,11 +13,11 @@ async function setWater(img) {
     const watermark = await Jimp.read(watermarkPath);
 
     // 调整水印尺寸
-    watermark.scaleToFit(image.getWidth() / 2, image.getHeight() / 2);
+    //watermark.scaleToFit(image.getWidth() / 2, image.getHeight() / 2);
 
     // 设置水印位置
-    const x = image.getWidth()/ 4;
-    const y = image.getHeight()/2;
+    const x = 0;
+    const y = 0;
 
     // 添加水印到原始图片
     image.composite(watermark, x, y, {
