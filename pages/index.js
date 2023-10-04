@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-
+import Viewer from "viewerjs";
 export default function HomePage() {
   const [inputValue, setInputValue] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -35,9 +35,8 @@ export default function HomePage() {
       // 设置 Image 元素的 src 属性为 URL 对象
       image.src = imageURL;
       // 添加 Image 元素到 HTML 页面中的某个容器中
-      document.body.appendChild(image);
       console.log("imageURL", imageURL);
-
+      window.imageURL = imageURL;
       setEmpty(false);
       setImageSrc(imageURL);
       setLoading(false);
@@ -59,10 +58,20 @@ export default function HomePage() {
     downloadLink.click();
   };
 
+  const preview = () => {
+    new Viewer(document.getElementById("image-container"), {
+      toolbar: true, // 显示工具栏
+      title: true, // 显示标题
+      navbar: false, // 隐藏导航栏
+      rotatable: true, // 启用旋转功能
+      scalable: false, // 禁用缩放功能
+    });
+  };
+
   return (
     <div className="watermark-box">
       <div className="watermark-content">
-        <div className="title">FTool – watermark tool</div>
+        <div className="title">FT watermark</div>
         <div className="des mt20">
           Add friend.tech watermark to your X (formerly Twitter) avatar
         </div>
@@ -72,7 +81,7 @@ export default function HomePage() {
           <input
             type="text"
             value={inputValue}
-            placeholder="Please enter a Twitter nickname."
+            placeholder="Enter you Twitter handle"
             onChange={(e) => setInputValue(e.target.value)}
           />
           {inputValue && <button onClick={handleConfirm}>Get avatar </button>}
@@ -85,7 +94,7 @@ export default function HomePage() {
               https://friend.tech/yequ_eth
             </a>
           </p>
-          <p>Adding me to your FT Watchlist is very helpful</p>
+          <p>Adding me to your FT Watchlist would be very helpful❤️</p>
         </div>
         {loading && (
           <svg
@@ -113,11 +122,16 @@ export default function HomePage() {
 
         {imageSrc && (
           <div className="img-info">
-            <img src={imageSrc} alt="图片" />
+            <div id="image-container">
+              <img src={imageSrc} alt="图片" />
+            </div>
             <button onClick={handleDownload}>Save</button>
+            {/* <button className="preview" onClick={preview}>
+              preview
+            </button> */}
             <p className="img-info-tips">
-              Press to enlarge, save, upload to Twitter, and Sync Profile in FT <br/>
-              点击放大，保存，上传至推特，并在FT中同步推特资料
+              Save, upload to Twitter and Sync Profile in FT <br />
+              保存后上传至推特，并在FT中同步资料
             </p>
           </div>
         )}

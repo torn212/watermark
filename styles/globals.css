@@ -47,7 +47,7 @@ body {
 }
 .watermark-content{
  width: 800px;
- height: 96vh;
+ min-height: 96vh;
  margin: 2vh auto;
  /* border: 1px solid #9d9999; */
  box-shadow: 0 0 10px #ccc;
@@ -79,10 +79,10 @@ body {
 .input-info input{
   width: 300px;
   height: 34px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(169, 168, 168);
   border-radius: 6px;;
   padding: 0 20px;
-  margin-top: 20px;;
+  margin-top: 14px;;
 }
 .input-info .input-info-label{
   font-weight: bold;
@@ -106,7 +106,7 @@ body {
   border: 1px dashed #009797;
   border-radius: 2px;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 40px;
   text-align: center;
 }
 .border-box a{
@@ -118,14 +118,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .img-info img{
-  width: 100px;
+  width: 200px;
   margin: 10px auto;
 }
 .img-info button{
-  width: 200px;
+  width: 100px;
   line-height: 34px;
   border: none;
   cursor: pointer;
@@ -140,6 +140,15 @@ body {
   margin-top: 10px;
   font-size: 14px;
   text-align: center;
+}
+.img-info .preview{
+  background: #ffffff;
+  border: 1px solid #ccc;
+  color: #333;
+  margin-top: 10px;
+}
+.img-info .preview:hover{
+  background: #f8f8f8;
 }
 .empty-info{
   width: 100%;
